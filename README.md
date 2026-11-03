@@ -20,3 +20,25 @@ Aplicação web de Ponto de Venda (PDV) offline desenvolvida num único ficheiro
 
 ---
 *Desenvolvido por João Victor Mendes Resende.*
+# Polpas Sul - Point of Sale (POS) System
+
+A single-file, offline-first web application for Point of Sale (POS) management built for the local business **Polpas Sul**.
+
+## 🚀 Features
+
+- **Front-of-House (POS):** Interactive cart with product search by name, barcode, and quantity shortcuts (e.g., `5*40`).
+- **Payment Management:** Supports Cash, Pix, Debit, Credit, and Split Payments with automatic change calculation.
+- **Promotion Engine:** Automated volume discounts and promotional pricing tied to specific dates or payment methods.
+- **Cash Register Control:** Register opening/closing, cash influx and outflux tracking with balance verification.
+- **Inventory Management:** Product registration, editing, and real-time stock tracking with low-stock alerts.
+- **History & Reports:** Detailed sales logging, receipt printing for thermal printers, and CSV data export.
+- **Security & Data Handling:** Sensitive action restrictions protected by a 4-digit PIN, plus full JSON backup and restore capabilities.
+
+## 🛠️ Tech Stack
+
+- **HTML5 & CSS3** (Responsive UI with Dark Mode support)
+- **JavaScript (ES6+)** (Core business logic and state management)
+- **LocalStorage API** (Offline-first persistent data storage)
+
+---
+*Developed by João Victor Mendes Resende.*

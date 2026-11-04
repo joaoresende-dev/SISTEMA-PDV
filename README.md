@@ -1,6 +1,5 @@
-Polpas Sul - Point of Sale (POS) System
-
-A single-file, offline-first web application for Point of Sale (POS) management built for the local business Polpas Sul.
+SmartPOS - Point of Sale (POS) System
+A single-file, offline-first web application for Point of Sale (POS) management built for local retail businesses.
 
 🚀 Features
 
@@ -26,9 +25,8 @@ JavaScript (ES6+) (Core business logic and state management)
 
 LocalStorage API (Offline-first persistent data storage)
 
-Polpas Sul - Sistema de Ponto de Venda (PDV)
-
-Aplicação web de Ponto de Venda (PDV) offline desenvolvida num único ficheiro (Single-File Web App) para o comércio local Polpas Sul.
+SmartPOS - Sistema de Ponto de Venda (PDV)
+Aplicação web de Ponto de Venda (PDV) offline desenvolvida num único ficheiro (Single-File Web App) para o comércio local.
 
 🚀 Funcionalidades
 

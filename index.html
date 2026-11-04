@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="light dark">
-<title>Polpas Sul · PDV</title>
+<title>Meu PDV · Ponto de Venda</title>
 <style>
 :root{
   --brand:#16a34a; --brand-strong:#15803d; --brand-soft:#dcfce7; --brand-ink:#ffffff;
@@ -406,7 +406,7 @@ tr.row-muted td{opacity:.55}
 <div id="auth" class="auth">
   <aside class="auth-brand">
     <div class="brand-mark big"><svg class="ic"><use href="#i-leaf"/></svg></div>
-    <h1 id="auth-store-name">Polpas Sul</h1>
+    <h1 id="auth-store-name">Meu Comércio</h1>
     <p>Ponto de venda rápido, seguro e que funciona sem internet.</p>
     <ul class="auth-points">
       <li><svg class="ic"><use href="#i-shield"/></svg> Senhas protegidas com PBKDF2-SHA256</li>
@@ -480,7 +480,7 @@ tr.row-muted td{opacity:.55}
   <aside class="sidebar">
     <div class="sb-brand">
       <div class="brand-mark"><svg class="ic"><use href="#i-leaf"/></svg></div>
-      <div><strong id="sb-store-name">Polpas Sul</strong><small>PONTO DE VENDA</small></div>
+      <div><strong id="sb-store-name">Meu Comércio</strong><small>PONTO DE VENDA</small></div>
     </div>
     <nav id="nav">
       <a data-view="panel" tabindex="0"><svg class="ic"><use href="#i-grid"/></svg><span>Painel</span></a>
@@ -896,7 +896,7 @@ tr.row-muted td{opacity:.55}
 /* =========================================================================
    NÚCLEO: armazenamento e utilitários
    ========================================================================= */
-const DB_PREFIX = 'polpas_sul_';
+const DB_PREFIX = 'meu_pdv_';
 const store = {
   get(key, def = null) {
     try { const v = localStorage.getItem(DB_PREFIX + key); return (v === null || v === 'undefined') ? def : JSON.parse(v); }
@@ -945,7 +945,7 @@ function toast(msg, type = 'success') {
 /* =========================================================================
    ESTADO
    ========================================================================= */
-const DEFAULT_SETTINGS = { name: 'Polpas Sul', cnpj: '', address: '', phone: '', pix: '', msg: 'Obrigado pela preferência!', lastBackup: null, promoEnabled: true, promoThreshold: 15, promoPrice: 100, autoLockMin: 10 };
+const DEFAULT_SETTINGS = { name: 'Meu Comércio', cnpj: '', address: '', phone: '', pix: '', msg: 'Obrigado pela preferência!', lastBackup: null, promoEnabled: true, promoThreshold: 15, promoPrice: 100, autoLockMin: 10 };
 
 function normalizeProduct(p) {
   return {
@@ -1011,7 +1011,7 @@ async function verifySecret(secret, rec) {
 }
 const dummyVerify = () => pbkdf2('x', new Uint8Array(16), SEC.ITER); // iguala o tempo quando o usuário não existe
 
-const COMMON_PASSWORDS = ['12345678', '123456789', '1234567890', 'password', 'password1', 'senha123', 'senha1234', 'qwerty123', 'abc12345', 'a1234567', 'admin123', 'polpas123', 'mudar123', '11111111', '00000000'];
+const COMMON_PASSWORDS = ['12345678', '123456789', '1234567890', 'password', 'password1', 'senha123', 'senha1234', 'qwerty123', 'abc12345', 'a1234567', 'admin123', 'pdv12345', 'mudar123', '11111111', '00000000'];
 function passwordProblem(pw, username = '') {
   if (pw.length < 8) return 'A senha precisa ter pelo menos 8 caracteres.';
   if (pw.length > 128) return 'Senha longa demais (máximo 128 caracteres).';
@@ -1812,14 +1812,14 @@ function renderProductsTable() {
   }).join('') : `<tr><td colspan="9"><div class="empty">${ico('package')}<div>Nenhum produto encontrado.</div></div></td></tr>`;
 }
 function fillCategoryList() {
-  const cats = [...new Set(['Polpas', 'Picolés', 'Sorvetes', 'Outros', ...products.map(p => p.category)])];
+  const cats = [...new Set(['Geral', 'Bebidas', 'Alimentos', 'Outros', ...products.map(p => p.category)])];
   $('cat-list').innerHTML = cats.map(c => `<option value="${esc(c)}">`).join('');
 }
 function togglePayPromoFields() { $('pay-promo-fields').hidden = !$('prod-has-pay-promo').checked; }
 function resetProductForm() {
   fillCategoryList();
   $('prod-modal-title').textContent = 'Novo produto';
-  $('prod-id').value = ''; $('prod-name').value = ''; $('prod-category').value = 'Polpas'; $('prod-unit').value = 'un';
+  $('prod-id').value = ''; $('prod-name').value = ''; $('prod-category').value = 'Geral'; $('prod-unit').value = 'un';
   $('prod-cost').value = '0.00'; $('prod-price').value = ''; $('prod-stock').value = '0'; $('prod-min-stock').value = '5';
   $('prod-barcode').value = ''; $('prod-active').checked = true; $('prod-promo').checked = false;
   $('prod-promo-price').value = ''; $('prod-promo-start').value = ''; $('prod-promo-end').value = '';
@@ -2122,8 +2122,8 @@ function savePromoSettings() {
 }
 function exportData() {
   if (session.role !== 'admin') return;
-  const data = { app: 'polpas-sul-pdv', version: 2, exportDate: nowISO(), products, sales, cashHistory, currentRegister, settings, users, audit: auditLog };
-  downloadFile(JSON.stringify(data), `Backup_PolpasSul_${localDay()}.json`, 'application/json');
+  const data = { app: 'meu-pdv', version: 2, exportDate: nowISO(), products, sales, cashHistory, currentRegister, settings, users, audit: auditLog };
+  downloadFile(JSON.stringify(data), `Backup_MeuPDV_${localDay()}.json`, 'application/json');
   settings.lastBackup = nowISO(); store.set('settings', settings);
   audit('backup'); checkBackupReminder(); toast('Backup concluído!');
 }
@@ -2505,7 +2505,7 @@ function init() {
   }
   if (products.length === 0 && sales.length === 0) {
     products = [
-      normalizeProduct({ id: '000001', name: 'POLPA GRAVIOLA 1KG', category: 'Polpas', cost: 1000, price: 1999, stock: 50, minStock: 10, unit: 'un', barcode: '40', active: true, promo: false }),
+      normalizeProduct({ id: '000001', name: 'PRODUTO EXEMPLO', category: 'Geral', cost: 1000, price: 1999, stock: 50, minStock: 10, unit: 'un', barcode: '40', active: true, promo: false }),
       normalizeProduct({ id: '000002', name: 'PICOLÉ MORANGO', category: 'Picolés', cost: 40, price: 150, stock: 100, minStock: 20, unit: 'un', barcode: '101', active: true, promo: true })
     ];
     store.set('products', products);
